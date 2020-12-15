@@ -31,41 +31,31 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.testingcomposedelete.fragments.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
+    // TODO : Jetpack compose , navigation , sharing values , and make animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Scaffold(
-                topBar = { ProvideTopAppBar(context = this, title = "Bottom Navigation Compose") },
-                bodyContent = {},
-            )
-        }
+        setContentView(R.layout.activity_main)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer,HomeFragment()).commit()
+
     }
 }
 
 
-@Composable
-fun ProvideTopAppBar(context: Context, title: String) {
-    TopAppBar(
-        actions = {
-            IconButton(onClick = {
-                Toast.makeText(context, "Click Waves Button...", Toast.LENGTH_LONG).show()
-            }) {
-                Icon(Icons.Default.Menu)
-            }
-        },
-        title = { Text(text = title, color = Color.Red) },
-        backgroundColor = Color.White,
-        elevation = 12.dp,
-    )
-}
+
+
